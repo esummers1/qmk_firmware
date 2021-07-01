@@ -117,11 +117,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_preonic_grid(
-  _______,    _______,     _______,      _______,      _______,      _______,    _______,     _______,      C(KC_X),   C(KC_C),   C(KC_V),   A(KC_BSPC),
-  _______,    _______,     _______,      _______,      _______,      _______,    _______,     _______,      G(KC_X),   G(KC_C),   G(KC_V),   A(KC_DEL),
-  _______,    _______,     _______,      _______,      _______,      _______,    _______,     _______,      C(KC_HOME),C(KC_PGUP),C(KC_PGDN),G(KC_ENT),
-  _______,    _______,     _______,      _______,      _______,      _______,    _______,     _______,      KC_HOME,   KC_PGDN,   KC_PGUP,   KC_END,
-  _______,    _______,     _______,      _______,      _______,      _______,    _______,     _______,      A(KC_LEFT),A(KC_DOWN),A(KC_UP),  A(KC_RGHT)
+  _______, _______, _______, _______, _______, _______, _______, _______, C(KC_X),   C(KC_C),   C(KC_V),   A(KC_BSPC),
+  _______, _______, _______, _______, _______, _______, _______, _______, G(KC_X),   G(KC_C),   G(KC_V),   A(KC_DEL),
+  _______, _______, _______, _______, _______, _______, _______, _______, C(KC_HOME),C(KC_PGUP),C(KC_PGDN),G(KC_ENT),
+  _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME,   KC_PGDN,   KC_PGUP,   KC_END,
+  _______, _______, _______, _______, _______, _______, _______, _______, A(KC_LEFT),A(KC_DOWN),A(KC_UP),  A(KC_RGHT)
 )
 
 };
@@ -155,52 +155,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     return true;
 };
-
-////////////////////////////////////////////////////////////////////////////////
-
-bool muse_mode = false;
-uint8_t last_muse_note = 0;
-uint16_t muse_counter = 0;
-uint8_t muse_offset = 70;
-uint16_t muse_tempo = 50;
-
-// Preserved for API purposes
-bool encoder_update_user(uint8_t index, bool clockwise) {
-  return true;
-}
-
-// Preserved for API purposes
-void dip_switch_update_user(uint8_t index, bool active) {
-    return;
-}
-
-void matrix_scan_user(void) {
-#ifdef AUDIO_ENABLE
-    if (muse_mode) {
-        if (muse_counter == 0) {
-            uint8_t muse_note = muse_offset + SCALE[muse_clock_pulse()];
-            if (muse_note != last_muse_note) {
-                stop_note(compute_freq_for_midi_note(last_muse_note));
-                play_note(compute_freq_for_midi_note(muse_note), 0xF);
-                last_muse_note = muse_note;
-            }
-        }
-        muse_counter = (muse_counter + 1) % muse_tempo;
-    } else {
-        if (muse_counter) {
-            stop_all_notes();
-            muse_counter = 0;
-        }
-    }
-#endif
-}
-
-bool music_mask_user(uint16_t keycode) {
-  switch (keycode) {
-    case RAISE:
-    case LOWER:
-      return false;
-    default:
-      return true;
-  }
-}
