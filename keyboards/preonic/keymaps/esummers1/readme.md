@@ -47,7 +47,7 @@ C  A  G  S     S  G  A  C
 
 The `ctrl`-based shortcuts on the top row here are due to using a Linux machine some of the time. In the future it would be good to use exclusively macOS shortcuts.
 
-The right-hand position for all of these is strongly preferred for me, since I am left handed.
+The right-hand position suits left handed users (such as the author), since they can be used with the left hand on the mouse.
 
 ```text
 ,-----------------------------------------------------------------------------------.
