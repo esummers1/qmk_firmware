@@ -86,6 +86,8 @@ This could probably use some improvement - there's no need to have so many F key
 This is essentially the base layer without home-row mods, and where the Raise key instead returns to the
 base layer.
 
+This needs to be improved to be useful for gaming, since the mod-tap configuration settings we have prevent repeated firing of a mod key when held.
+
 ```text
 ,-----------------------------------------------------------------------------------.
 |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
