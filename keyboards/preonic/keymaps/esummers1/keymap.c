@@ -21,14 +21,16 @@ enum preonic_layers {
   _BASE,
   _META,
   _LOWER,
-  _RAISE
+  _RAISE,
+  _GAME,
 };
 
 enum preonic_keycodes {
   BASE = SAFE_RANGE,
   LOWER,
   RAISE,
-  META
+  META,
+  GAME
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -50,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Fn   | Ctrl | Alt  | GUI  |Lower |Space |Space |Raise | Left | Down |  Up  |Right |
+ * | FN   | Ctrl | Alt  | GUI  |LOWER |Space |Space |RAISE | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_BASE] = LAYOUT_preonic_grid(
@@ -71,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Shift|RGBtog|RGBHdn|RGBHup|  F5  |  F6  |  F7  |  F8  | Play |Brt.dn|Brt.up|Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      | Prev |Vol.dn|Vol.up| Next |
+ * |      |      |      |      |      |      |      | GAME | Prev |Vol.dn|Vol.up| Next |
  * `-----------------------------------------------------------------------------------'
  */
 [_META] = LAYOUT_preonic_grid(
@@ -79,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
   KC_LSFT, RGB_TOG, RGB_HUD, RGB_HUI, KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_MPLY, KC_BRID, KC_BRIU, KC_RSFT,
-  _______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT
+  _______, _______, _______, _______, _______, _______, _______, GAME,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT
 ),
 
 /* Symbols (LWR)
@@ -122,36 +124,69 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, C(KC_HOME),C(KC_PGUP),C(KC_PGDN),G(KC_ENT),
   _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME,   KC_PGDN,   KC_PGUP,   KC_END,
   _______, _______, _______, _______, _______, _______, _______, _______, A(KC_LEFT),A(KC_DOWN),A(KC_UP),  A(KC_RGHT)
+),
+
+/* Game
+ *
+ * This is essentially the base layer without home-row mods, and where the Raise key instead returns to the
+ * base layer.
+ *
+ * ,-----------------------------------------------------------------------------------.
+ * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Del  |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * | Esc  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |Enter |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | FN   | Ctrl | Alt  | GUI  |LOWER |Space |Space | BASE | Left | Down |  Up  |Right |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_GAME] = LAYOUT_preonic_grid(
+  KC_GRV,  KC_1,     KC_2,     KC_3,     KC_4,   KC_5,   KC_6,   KC_7,   KC_8,      KC_9,      KC_0,      KC_BSPC,
+  KC_TAB,  KC_Q,     KC_W,     KC_E,     KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,      KC_O,      KC_P,      KC_DEL,
+  KC_ESC,  KC_A,     KC_S,     KC_D,     KC_F,   KC_G,   KC_H,   KC_J,   KC_K,      KC_L,      KC_SCLN,   KC_ENT,
+  KC_LSFT, KC_Z,     KC_X,     KC_C,     KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,   KC_DOT,    KC_SLSH,   KC_RSFT,
+  META,    KC_LCTL,  KC_LALT,  KC_LGUI,  LOWER,  KC_SPC, KC_SPC, BASE,   KC_LEFT,   KC_DOWN,   KC_UP,     KC_RGHT
 )
 
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+        case BASE:
+            set_single_persistent_default_layer(_BASE);
+            return false;
+            break;
+        case GAME:
+            set_single_persistent_default_layer(_GAME);
+            return false;
+            break;
         case LOWER:
-          if (record->event.pressed) {
-            layer_on(_LOWER);
-          } else {
-            layer_off(_LOWER);
-          }
-          return false;
-          break;
+            if (record->event.pressed) {
+                layer_on(_LOWER);
+            } else {
+                layer_off(_LOWER);
+            }
+            return false;
+            break;
         case RAISE:
-          if (record->event.pressed) {
-            layer_on(_RAISE);
-          } else {
-            layer_off(_RAISE);
-          }
-          return false;
-          break;
+            if (record->event.pressed) {
+                layer_on(_RAISE);
+            } else {
+                layer_off(_RAISE);
+            }
+            return false;
+            break;
         case META:
-          if (record->event.pressed) {
-            layer_on(_META);
-          } else {
-            layer_off(_META);
-          }
-          return false;
-          break;
+            if (record->event.pressed) {
+                layer_on(_META);
+            } else {
+                layer_off(_META);
+            }
+            return false;
+            break;
       }
     return true;
 };
