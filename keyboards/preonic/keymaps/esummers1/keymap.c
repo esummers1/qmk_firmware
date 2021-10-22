@@ -80,13 +80,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
         case BASE:
-            set_single_persistent_default_layer(_BASE);
-            return false;
-            break;
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_BASE);
+                return false;
+                break;
+            }
         case GAME:
-            set_single_persistent_default_layer(_GAME);
-            return false;
-            break;
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_GAME);
+                return false;
+                break;
+            }
         case LOWER:
             if (record->event.pressed) {
                 layer_on(_LOWER);
