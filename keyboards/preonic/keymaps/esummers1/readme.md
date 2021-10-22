@@ -16,7 +16,7 @@ This layout is designed mostly for programming, and makes use of home-row mods.
 |------+------+------+------+------+------|------+------+------+------+------+------|
 | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
 |------+------+------+------+------+------+------+------+------+------+------+------|
-| FN   | Ctrl | Alt  | GUI  |LOWER |Space |Space |RAISE | Left | Down |  Up  |Right |
+| FN   | Ctrl | Alt  | GUI  |LOWER |Shift |Space |RAISE | Left | Down |  Up  |Right |
 `-----------------------------------------------------------------------------------'
 ```
 
@@ -39,7 +39,7 @@ C  A  G  S     S  G  A  C
 |------+------+------+------+------+------|------+------+------+------+------+------|
 | Shift|  \   |  @   |  '   |  "   |      |      |   -  |   ~  |   #  |   ?  |Shift |
 |------+------+------+------+------+------+------+------+------+------+------+------|
-|      | Ctrl | Alt  | GUI  |      |Space |Space |      | Left | Down |  Up  |Right |
+|      | Ctrl | Alt  | GUI  |      |Shift |Space |      | Left | Down |  Up  |Right |
 `-----------------------------------------------------------------------------------'
 ```
 
@@ -98,6 +98,6 @@ This needs to be improved to be useful for gaming, since the mod-tap configurati
 |------+------+------+------+------+------|------+------+------+------+------+------|
 | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
 |------+------+------+------+------+------+------+------+------+------+------+------|
-| FN   | Ctrl | Alt  | GUI  |LOWER |Space |Space | BASE | Left | Down |  Up  |Right |
+| FN   | Ctrl | Alt  | GUI  |LOWER |Shift |Space | BASE | Left | Down |  Up  |Right |
 `-----------------------------------------------------------------------------------'
 ```
