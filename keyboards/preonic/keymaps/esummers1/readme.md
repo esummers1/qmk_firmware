@@ -45,8 +45,6 @@ C  A  G  S     S  G  A  C
 
 ### Upper (Shortcuts)
 
-The `ctrl`-based shortcuts on the top row here are due to using a Linux machine some of the time. In the future it would be good to use exclusively macOS shortcuts.
-
 The right-hand position suits left handed users (such as the author), since they can be used with the left hand on the mouse.
 
 ```text
