@@ -2,6 +2,14 @@
 
 This layout is designed mostly for programming, and makes use of home-row mods.
 
+## Build
+
+```zsh
+qmk compile -kb preonic/rev3_drop -km esummers1
+```
+
+This will generate a `preonic_rev3_drop_esummers1.bin` in the project root, which you can flash using the [QMK Toolbox](https://github.com/qmk/qmk_toolbox).
+
 ## Layers
 
 ### Base
