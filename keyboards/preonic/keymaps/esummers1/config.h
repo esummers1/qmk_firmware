@@ -15,7 +15,7 @@
 //
 // Too small a number means that if you roll between keys or strike keys very close together, you
 // will sometimes get mods fired instead of letters.
-#define TAPPING_TERM 600
+#define TAPPING_TERM 400
 
 // If you want to type J followed by a capital letter from the left hand, you will want to hold J to
 // chord with the left-hand letter.
